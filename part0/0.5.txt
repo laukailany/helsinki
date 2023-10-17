@@ -1,0 +1,39 @@
+sequenceDiagram
+    participant Browser
+    participant Server
+    participant JavaScript
+
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    activate Server
+    Server-->>Browser: HTML document
+    deactivate Server
+
+    Browser->>JavaScript: Execute JavaScript code
+    activate JavaScript
+
+    JavaScript->>JavaScript: Render SPA
+    JavaScript->>Browser: Update DOM with SPA
+    deactivate JavaScript
+
+    Note right of Browser: SPA is now rendered in the browser
+
+    Browser->>JavaScript: User interacts with SPA
+    activate JavaScript
+
+    JavaScript->>JavaScript: Handle user actions
+    JavaScript->>Server: API request
+    activate Server
+    Server-->>JavaScript: API response
+    deactivate Server
+    JavaScript->>JavaScript: Update DOM with new data
+    deactivate JavaScript
+
+    Browser->>JavaScript: User continues interacting with SPA
+    activate JavaScript
+
+    JavaScript->>Server: API request
+    activate Server
+    Server-->>JavaScript: API response
+    deactivate Server
+    JavaScript->>JavaScript: Update DOM with new data
+    deactivate JavaScript
