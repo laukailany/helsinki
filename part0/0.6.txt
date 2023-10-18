@@ -1,0 +1,18 @@
+sequenceDiagram
+    participant Browser
+    participant Server
+    participant JavaScript
+
+    Browser->>JavaScript: User enters new note content
+    activate JavaScript
+    JavaScript->>JavaScript: Validate input
+    alt Input is valid
+        JavaScript->>Server: POST https://studies.cs.helsinki.fi/exampleapp/spa/new_note
+        activate Server
+        Server-->>JavaScript: Note successfully saved
+        deactivate Server
+        JavaScript->>JavaScript: Update note list in DOM
+    else Input is invalid
+        JavaScript-->>Browser: Display error message
+    end
+    deactivate JavaScript
